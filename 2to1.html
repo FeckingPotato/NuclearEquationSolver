@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <title>(A + B &#8594; C)</title>
+    <script type="text/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" href="css/calc.css" />
+</head>
+
+<body onload="translation = translate(document, navigator)">
+    <header></header>
+    <main>
+        <div class="center">
+            <div class="grid-container">
+                <div class="z c1">
+                    <input type="text" size="1" class="z_left" />
+                </div>
+                <div class="m c1">
+                    <input type="text" size="1" class="m_left" />
+                </div>
+                <div class="element c2">A</div>
+                <div class="name c2">
+                    A
+                </div>
+                <div class="sign c3">+</div>
+                <div class="z c4">
+                    <input type="text" size="1" class="z_left" />
+                </div>
+                <div class="m c4">
+                    <input type="text" size="1" class="m_left" />
+                </div>
+                <div class="element c5">B</div>
+                <div class="name c5">
+                    B
+                </div>
+                <div class="sign c6">&#8594;</div>
+                <div class="z c7">
+                    <input type="text" size="1" class="z_right" />
+                </div>
+                <div class="m c7">
+                    <input type="text" size="1" class="m_right" />
+                </div>
+                <div class="element c8">C</div>
+                <div class="name c8">
+                    C
+                </div>
+                <div class="solve">
+                    <input class="btn_solve" type="button" onclick="calc(document, translation, 12)" />
+                </div>
+                <div class="clear">
+                    <input class="btn_clear" type="button" onclick="reset(document, translation)" />
+                </div>
+                <div class="back">
+                    <a class="lnk_back" href="/index.html"></a>
+                </div>
+                <div class="lang">
+                    <a class="lnk_lang" href="javascript:changeLang(document, navigator, localStorage);"></a>
+                  </div>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+
+</html>

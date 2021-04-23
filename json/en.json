@@ -1,0 +1,13 @@
+{
+    "err_wrong": "The equation is wrong",
+    "err_notenough": "Not enough elements",
+    "err_checkmz": "Check mass and charge values",
+    "btn_solve": "Solve",
+    "btn_clear": "Clear",
+    "txt_back": "Go back",
+    "txt_element": "Element",
+    "entry_decay": "Fission / Decay",
+    "entry_trans": "Transmutation",
+    "entry_synth": "Synthesis",
+    "lang": "Русский"
+}

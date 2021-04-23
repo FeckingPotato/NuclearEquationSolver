@@ -1,0 +1,24 @@
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80vh;
+}
+.grid-container {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: auto;
+}
+
+.entry {
+    font-size: 40px;
+}
+
+.lang {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    font-size: large;
+}
