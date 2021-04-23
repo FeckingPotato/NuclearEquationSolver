@@ -1,6 +1,6 @@
 let translation;
 
- async function calc(document, translation, type) {
+ async function calc(document, translation, type, localStorage) {
     translation = await translation;
     let chargeL = Array.from(document.getElementsByClassName("z_left"));
     let massL = Array.from(document.getElementsByClassName("m_left"));
@@ -49,7 +49,8 @@ let translation;
                     elements,
                     chargeL.concat(chargeR),
                     massL.concat(massR),
-                    names
+                    names,
+                    localStorage
                 );
             } else alert(translation.err_wrong);
         } else alert(translation.err_notenough);
@@ -129,7 +130,7 @@ function verify(chargeL, massL, chargeR, massR) {
     if (totalChargeL == totalChargeR && totalMassL == totalMassR) return true;
     return false;
 }
-async function setElements(elements, charges, masses, names) {
+async function setElements(elements, charges, masses, names, localStorage) {
     let ptable = await fetch("../json/elements.json");
     ptable = await ptable.json();
     for (let i = 0; i < elements.length; i++) {
@@ -160,7 +161,7 @@ async function setElements(elements, charges, masses, names) {
             };
         }
         elements[i].textContent = desc.symbol;
-        names[i].textContent = desc[`name_${navigator.language.substring(0, 2)}`] || desc.name_en
+        names[i].textContent = desc[`name_${localStorage.lang}`] || desc.name_en
     }
 }
 
