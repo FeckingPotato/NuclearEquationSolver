@@ -230,7 +230,7 @@ async function reset(document, translation) {
     for (let i = 0; i < charges.length ; i++) {
         charges[i].value = "";
         masses[i].value = "";
-        console.log(translation)
+        elements[i].textContent = abcd[i];
         names[i].textContent = `${translation.txt_element}  ${abcd[i]}`;
     }
 
