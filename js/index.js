@@ -131,7 +131,7 @@ function verify(chargeL, massL, chargeR, massR) {
     return false;
 }
 async function setElements(elements, charges, masses, names, localStorage) {
-    let ptable = await fetch("../json/elements.json");
+    let ptable = await fetch("/json/elements.json");
     ptable = await ptable.json();
     for (let i = 0; i < elements.length; i++) {
         let desc;
@@ -187,7 +187,7 @@ async function translate(document, navigator) {
     if(!localStorage.lang) {
         localStorage.lang = lang;
     }
-    const translation = await (await fetch(`./json/${lang}.json`)).json();
+    const translation = await (await fetch(`/json/${lang}.json`)).json();
     if (document.title.substring(0, 1) == "N") {
         let entries = document.getElementsByClassName("entry");
         entries[0].textContent = translation.entry_decay + " (A → B + C)";
