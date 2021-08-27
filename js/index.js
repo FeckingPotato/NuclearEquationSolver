@@ -135,21 +135,25 @@ async function setElements(elements, charges, masses, names, localStorage) {
     ptable = await ptable.json();
     for (let i = 0; i < elements.length; i++) {
         let desc;
-        if (charges[i].value == -1 && masses[i].value == 0) {
+        if (charges[i].value < 0 && masses[i].value == 0) {
             desc = {
-                symbol: "e",
+                symbol: `${charges[i].value}e`,
                 name_en: "Electron",
                 name_ru: "Электрон",
             };
-        } else if (charges[i].value == 0 && masses[i].value == 1) {
+        } else if (charges[i].value == 0 && masses[i].value > 0) {
             desc = {
-                symbol: "n",
+                symbol: `${masses[i].value}n`,
                 name_en: "Neutron",
                 name_ru: "Нейтрон",
             };
-        } else if (charges[i].value == 1 && masses[i].value == 1) {
+        } else if (charges[i].value == masses[i].value) {
+            let coef = "";
+            if (charges[i].value > 1) {
+                coef = charges[i].value;
+            }
             desc = {
-                symbol: "p",
+                symbol: `${coef * -1}p`,
                 name_en: "Proton",
                 name_ru: "Протон",
             };
