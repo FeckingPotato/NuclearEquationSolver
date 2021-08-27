@@ -1,5 +1,6 @@
 {
     "err_wrong": "The equation is wrong",
+    "err_nofree" : "There is no element to calculate",
     "err_notenough": "Not enough elements",
     "err_checkmz": "Check mass and charge values",
     "btn_solve": "Solve",

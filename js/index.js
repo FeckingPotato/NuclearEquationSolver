@@ -14,35 +14,39 @@ let translation;
         compareArr(emptyChargeL, findEmpty(massL)) &&
         compareArr(emptyChargeR, findEmpty(massR))
     ) {
-        //allows to not check for empty mass fields
-        if (emptyChargeL.length + emptyChargeR.length >= 1) {
-                if (type == 12) {
-                    calc1to2(
-                        emptyChargeL,
-                        emptyChargeR,
-                        chargeL,
-                        massL,
-                        chargeR,
-                        massR
-                    );
-                } else if (type == 21) {
-                    calc2to1(
-                        emptyChargeL,
-                        emptyChargeR,
-                        chargeL,
-                        massL,
-                        chargeR,
-                        massR
-                    );
-                } else if (type == 22) {
-                    calc2to2(
-                        emptyChargeL,
-                        emptyChargeR,
-                        chargeL,
-                        massL,
-                        chargeR,
-                        massR
-                    );
+        let freeElements = emptyChargeL.length + emptyChargeR.length;
+        if (freeElements == 1) {
+                switch (type) {
+                    case 12:
+                        calc1to2(
+                            emptyChargeL,
+                            emptyChargeR,
+                            chargeL,
+                            massL,
+                            chargeR,
+                            massR
+                        );
+                        break;
+                    case 21:
+                        calc2to1(
+                            emptyChargeL,
+                            emptyChargeR,
+                            chargeL,
+                            massL,
+                            chargeR,
+                            massR
+                        );
+                        break;
+                    case 22:
+                        calc2to2(
+                            emptyChargeL,
+                            emptyChargeR,
+                            chargeL,
+                            massL,
+                            chargeR,
+                            massR
+                        );
+                        break;
                 }
             if (verify(chargeL, massL, chargeR, massR) && checkMass(chargeL.concat(chargeR), massL.concat(massR))) {
                 setElements(
@@ -52,8 +56,16 @@ let translation;
                     names,
                     localStorage
                 );
-            } else alert(translation.err_wrong);
-        } else alert(translation.err_notenough);
+            }
+            else {
+                alert(translation.err_wrong);
+            }
+        } else if (freeElements == 0) {
+            alert(translation.err_nofree)
+        }
+        else {
+            alert(translation.err_notenough);
+        }
     } else alert(translation.err_checkmz);
 }
 
@@ -136,8 +148,12 @@ async function setElements(elements, charges, masses, names, localStorage) {
     for (let i = 0; i < elements.length; i++) {
         let desc;
         if (charges[i].value < 0 && masses[i].value == 0) {
+            let coef = "";
+            if (charges[i].value < -1) {
+                coef = charges[i].value * -1;
+            }
             desc = {
-                symbol: `${charges[i].value}e`,
+                symbol: `${coef}e`,
                 name_en: "Electron",
                 name_ru: "Электрон",
             };
@@ -153,7 +169,7 @@ async function setElements(elements, charges, masses, names, localStorage) {
                 coef = charges[i].value;
             }
             desc = {
-                symbol: `${coef * -1}p`,
+                symbol: `${coef}p`,
                 name_en: "Proton",
                 name_ru: "Протон",
             };
@@ -186,8 +202,8 @@ function compareArr(arr1, arr2) {
 }
 
 
-async function translate(document, navigator) {
-    let lang = localStorage.lang || navigator.language.substring(0,2);
+async function translate(document, language) {
+    let lang = localStorage.lang || language.substring(0,2);
     if(!localStorage.lang) {
         localStorage.lang = lang;
     }
@@ -216,12 +232,12 @@ async function translate(document, navigator) {
     return translation;
 }
 
-async function changeLang(document, navigator, localStorage) {
+async function changeLang(document, language, localStorage) {
     if (localStorage.lang == "en") {
         localStorage.lang = "ru";
     }
     else localStorage.lang = "en";
-    translate(document, navigator);
+    translate(document, language);
 }
 
 async function reset(document, translation) {
@@ -230,12 +246,11 @@ async function reset(document, translation) {
     let masses = Array.from(document.getElementsByClassName("m_left")).concat(Array.from(document.getElementsByClassName("m_right")));
     let elements = document.getElementsByClassName("element");
     let names = document.getElementsByClassName("name");
-    let abcd = ["A", "B", "C", "D"];
     for (let i = 0; i < charges.length ; i++) {
         charges[i].value = "";
         masses[i].value = "";
-        elements[i].textContent = abcd[i];
-        names[i].textContent = `${translation.txt_element}  ${abcd[i]}`;
+        elements[i].textContent = ["A", "B", "C", "D"][i];
+        names[i].textContent = `${translation.txt_element}  ${["A", "B", "C", "D"][i]}`;
     }
 
 }
